@@ -1,0 +1,46 @@
+{
+  "id": null,
+  "purpose": null,
+  "spoken_content": null,
+  "screen_words": [],
+  "source_video": null,
+  "source_range_seconds": null,
+  "fps": null,
+  "speech_anchors": [],
+  "timing_status": "unlocated",
+  "keyframe": null,
+  "assets": [],
+  "icon_family_contract": null,
+  "motion": {
+    "entrance": null,
+    "hold": null,
+    "exit": null
+  },
+  "audio": {
+    "source_has_audio": null,
+    "authorized_changes": []
+  },
+  "delivery_type": null,
+  "approval": {
+    "visual_style": null,
+    "components": null,
+    "final_clip": null
+  },
+  "visual_mechanism": null,
+  "generation": {
+    "tool": null,
+    "model": null,
+    "prompt_file": null,
+    "input_assets": [],
+    "actual_size": null,
+    "generated_at": null
+  },
+  "review": {
+    "icon_nesting": null,
+    "meaningful_visual_explanation": null,
+    "whitespace_and_scale": null,
+    "static_match": null,
+    "playback": null,
+    "notes": []
+  }
+}

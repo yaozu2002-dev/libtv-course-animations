@@ -1,0 +1,30 @@
+{
+  "version": "1.1.0",
+  "tested_on": "2026-11-07",
+  "status": "render-and-decode-verified-not-new-art-direction-approval",
+  "starter": {
+    "duration_seconds": 13,
+    "size": [
+      1920,
+      1080
+    ],
+    "fps": 30,
+    "codec": "h264",
+    "pixel_format": "yuv420p",
+    "color_range": "tv",
+    "audio": false,
+    "frames": 390,
+    "dependencies_installed_from_lock": true,
+    "font_local_name": "PingFangSC-Medium",
+    "full_decode": "passed"
+  },
+  "checks": [
+    "source-preserved",
+    "true-alpha-icons",
+    "overwrite-protection",
+    "out-of-bounds-rejected",
+    "reference-links",
+    "portable-relative-assets"
+  ],
+  "remaining": "新设计建议未生成或验收；此记录只证明起步流程可运行。"
+}

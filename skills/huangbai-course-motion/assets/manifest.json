@@ -1,0 +1,291 @@
+{
+  "version": "1.1.0",
+  "updated": "2026-11-07",
+  "style_approved_date": "2026-11-06",
+  "latest_feedback_date": "2026-11-07",
+  "current_approved_design": "references/images/approved-imagegen-layout.png",
+  "latest_rejections": [
+    "references/images/rejected-nested-storyboard.png",
+    "references/images/rejected-text-only-concepts.png"
+  ],
+  "fonts_included": false,
+  "notes": "原始反例只作判断参考；新修正建议未生图/验收。清单不包含自身。",
+  "items": [
+    {
+      "path": "SKILL.md",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 7741,
+      "sha256": "d8ffd320884c37f33e51e51b197eba0b22cc8d039f782303663ac574eedeb264"
+    },
+    {
+      "path": "agents/openai.yaml",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 449,
+      "sha256": "890aceb43ebb63045103c62c8a90beab467028ebde6675f9999f70f672a58677"
+    },
+    {
+      "path": "assets/approved-icon-boxes.json",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 446,
+      "sha256": "22e569aad22f4a7aa58b51dc201077876fdf21678990ac957c3b2a8e97680496"
+    },
+    {
+      "path": "assets/background.png",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 1392837,
+      "sha256": "3380d271b4c6a3e88fcb6b960f870c35a1be1510813823506dc7f1899aad7443"
+    },
+    {
+      "path": "assets/design-tokens.json",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 1036,
+      "sha256": "9766208ec1a7e1a82b30901e4688ec4317dfc11a77ae16cb4878b29646bf35ec"
+    },
+    {
+      "path": "assets/shot-spec.json",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 924,
+      "sha256": "c2af244e59ee6438dc67397d563d4a2bec829352c7e5e6ce1b266961cee79a17"
+    },
+    {
+      "path": "assets/starter/assets/background.png",
+      "status": "portable-starter-tested",
+      "bytes": 1392837,
+      "sha256": "3380d271b4c6a3e88fcb6b960f870c35a1be1510813823506dc7f1899aad7443"
+    },
+    {
+      "path": "assets/starter/assets/image.png",
+      "status": "portable-starter-tested",
+      "bytes": 4680,
+      "sha256": "04a1cbadcf08583c00c4afc2dc558883bc7e99072cd99e021cf3ca1b385c9482"
+    },
+    {
+      "path": "assets/starter/assets/text.png",
+      "status": "portable-starter-tested",
+      "bytes": 3613,
+      "sha256": "4dfcd89115b08abd1e8c463e702e98d7bb081fce777bc2f13e280b88697d9676"
+    },
+    {
+      "path": "assets/starter/assets/video.png",
+      "status": "portable-starter-tested",
+      "bytes": 4252,
+      "sha256": "d413bba21d7c0bb4f11da1ddedaa52df5d3a7fd926a07498094ed39846d94062"
+    },
+    {
+      "path": "assets/starter/composition.json",
+      "status": "portable-starter-tested",
+      "bytes": 2072,
+      "sha256": "0419a06762a69a67ebc2821132d1d6c5258bb2eeaf4cf99360bf53d4e6090e56"
+    },
+    {
+      "path": "assets/starter/index.html",
+      "status": "portable-starter-tested",
+      "bytes": 3122,
+      "sha256": "859ab78ba1b4d665ab507ffac43e109d741dc510d442a78b2d815d2111a4b2d8"
+    },
+    {
+      "path": "assets/starter/package-lock.json",
+      "status": "portable-starter-tested",
+      "bytes": 1709,
+      "sha256": "3946ff63de3135ec7e0308e85acf3539f316a3342d1b3f45d4ba1742982d391c"
+    },
+    {
+      "path": "assets/starter/package.json",
+      "status": "portable-starter-tested",
+      "bytes": 212,
+      "sha256": "391f7f7bf25104c9c808cc6503366fbbf233d41ba8bc46504a914a6c47e71748"
+    },
+    {
+      "path": "assets/starter/render.mjs",
+      "status": "portable-starter-tested",
+      "bytes": 4108,
+      "sha256": "c92608248369585917a419aa132319b8c71bfdb532fec6ed91a01bba8952bd7b"
+    },
+    {
+      "path": "assets/white-icons/extraction.json",
+      "status": "extracted-from-approved-layout-visually-checked",
+      "bytes": 1046,
+      "sha256": "d3a48fec8ed30fb4e92211850d340f0e1ec96541980bc7d3ecf982661b3db773"
+    },
+    {
+      "path": "assets/white-icons/image.png",
+      "status": "extracted-from-approved-layout-visually-checked",
+      "bytes": 4680,
+      "sha256": "04a1cbadcf08583c00c4afc2dc558883bc7e99072cd99e021cf3ca1b385c9482"
+    },
+    {
+      "path": "assets/white-icons/text.png",
+      "status": "extracted-from-approved-layout-visually-checked",
+      "bytes": 3613,
+      "sha256": "4dfcd89115b08abd1e8c463e702e98d7bb081fce777bc2f13e280b88697d9676"
+    },
+    {
+      "path": "assets/white-icons/video.png",
+      "status": "extracted-from-approved-layout-visually-checked",
+      "bytes": 4252,
+      "sha256": "d413bba21d7c0bb4f11da1ddedaa52df5d3a7fd926a07498094ed39846d94062"
+    },
+    {
+      "path": "references/examples/starter-demo.mp4",
+      "status": "verified-layout-reproduction-example",
+      "bytes": 377761,
+      "sha256": "ee5f5cbc961462ac567dd2eabe692951674c90e207571389759f04c004867a9d"
+    },
+    {
+      "path": "references/examples/starter-validation.json",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 744,
+      "sha256": "06e614f9e37f7cf2a3fd055ac1c37fe013eea26a8cb2cf367961a78415027cef"
+    },
+    {
+      "path": "references/examples/style-demo.mp4",
+      "status": "historical-reference-only-not-default",
+      "bytes": 3107541,
+      "sha256": "3e308f0c5cbc20cc0ece770f4a74dfd40183f94e34e0720c79c4af6dc51859cb"
+    },
+    {
+      "path": "references/forms-and-motion.md",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 2870,
+      "sha256": "7cfb886b9e4e5db322a1e17d33c889c27d2afc27a866492ff28e53ae833e0745"
+    },
+    {
+      "path": "references/icon-family.md",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 3930,
+      "sha256": "251522ba9301ac4a21dedd42983d04e24b2d956c9b2d72f77fe1daa6bbd57057"
+    },
+    {
+      "path": "references/images/approved-imagegen-layout.png",
+      "status": "approved-layout-white-icons-whitespace",
+      "bytes": 1296137,
+      "sha256": "012e2e71feae0ceaf11140b8cfc75c41f180f87f30c61dd906b539fd4a4baedb"
+    },
+    {
+      "path": "references/images/keyframe-board.png",
+      "status": "historical-reference-only-not-default",
+      "bytes": 1512991,
+      "sha256": "14d4c2578b2cc81e0e78cc963197a5a10bce7f3b630443d40b80431c0a4d02db"
+    },
+    {
+      "path": "references/images/overfull-white-icons.png",
+      "status": "rejected-layout-too-full",
+      "bytes": 1289654,
+      "sha256": "93f6eba27a54e43da87b5eb6fae99cfb549bca5dee0ec473adda11c9fd6c4c5d"
+    },
+    {
+      "path": "references/images/packaging-fullscreen.jpg",
+      "status": "historical-reference-only-not-default",
+      "bytes": 4857806,
+      "sha256": "7a1b38fa6c4d181eee7f9121d602913cf02711a317cdaf158517c9db6a5492b4"
+    },
+    {
+      "path": "references/images/packaging-icons.jpg",
+      "status": "historical-reference-only-not-default",
+      "bytes": 678256,
+      "sha256": "92c231981b1fdc5b91cc103d1b5cac0dd5f23235098cc762a9982dffcd45e258"
+    },
+    {
+      "path": "references/images/packaging-keywords.jpg",
+      "status": "historical-reference-only-not-default",
+      "bytes": 1170419,
+      "sha256": "be465d154087b8b1945a6d262f5df28746e7898c66e501618029b0d7c750c8f4"
+    },
+    {
+      "path": "references/images/rejected-icon-family.png",
+      "status": "rejected-reference-only",
+      "bytes": 1376791,
+      "sha256": "b1013eb8d3a0a1f44186abc048eadd63c78b2b7a6f5bae5d90a5ce6f8e3b61b4"
+    },
+    {
+      "path": "references/images/rejected-nested-storyboard.png",
+      "status": "rejected-reference-only",
+      "bytes": 21676,
+      "sha256": "2936dc0621db113d3e749200fcbbfde3fea3c2880da564e85aa3970ec065072b"
+    },
+    {
+      "path": "references/images/rejected-text-only-concepts.png",
+      "status": "rejected-reference-only",
+      "bytes": 446121,
+      "sha256": "52a46fd3159becc96feef86a55b3cae2083abdbb5ac523f5e323eceffbf7a8c7"
+    },
+    {
+      "path": "references/images/white-icon-contact-sheet.png",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 49080,
+      "sha256": "7e006eef719cbbc0d82e5f765e77261cd4b8f20aaf2f202b0365654bb1160168"
+    },
+    {
+      "path": "references/implementation.md",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 5122,
+      "sha256": "171c84eb80b3afa48ea93e28c3ba08b274c9b085adafbb58d19312ae548d7252"
+    },
+    {
+      "path": "references/keyframes-and-prompts.md",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 7711,
+      "sha256": "e176575c8af75fd40d5d169ce6e89b5cbabec3b0fecc95e9936961496b82da65"
+    },
+    {
+      "path": "references/production-playbook.md",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 6619,
+      "sha256": "fcd40005a4889acce04965b438a56a530be6867110959168653ed34792b2a371"
+    },
+    {
+      "path": "references/prompt-recipes.md",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 7060,
+      "sha256": "b7b6d44e3a635e933b9e0a4bb61698e0eb19ddb6d4da7d4cc7fa75963f08098f"
+    },
+    {
+      "path": "references/quality-check.md",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 2910,
+      "sha256": "bdb94652bb6c8813c36893ca302c3a80907ce9552da1710ebd89f685707c4f1b"
+    },
+    {
+      "path": "references/sources-and-assets.md",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 4458,
+      "sha256": "cb4ed442e0cd8772b00c1a26075e4a460184363cc93772749da0a6bb8a46d6a7"
+    },
+    {
+      "path": "references/starter-and-scripts.md",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 6980,
+      "sha256": "8f696516fd14b7f153c072c1734bb4914f12e53a6962cd867350b56e46bb634d"
+    },
+    {
+      "path": "references/visual-explanation.md",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 4159,
+      "sha256": "a5fd6b7474143ca7acef41033019cbe6d2e032e9f9b68658ca6cd5d99cd69ff1"
+    },
+    {
+      "path": "references/visual-language.md",
+      "status": "current-guidance-or-supporting-file",
+      "bytes": 4294,
+      "sha256": "b51b119da208f3288836a8b7892531e8ef527d7305eb222abd882031beb11174"
+    },
+    {
+      "path": "scripts/extract_white_icons.py",
+      "status": "reusable-helper-tested",
+      "bytes": 3692,
+      "sha256": "aec59c994cff46b59d7c2c8478018f92cb6e161fa2de8c96a60417494d72ac15"
+    },
+    {
+      "path": "scripts/icon_contact_sheet.py",
+      "status": "reusable-helper-tested",
+      "bytes": 3276,
+      "sha256": "1241890bb0d9822f3f94d8ad987c51ab82ccc4b951ab46eb1eb36d5e3ff54551"
+    },
+    {
+      "path": "scripts/verify_assets.py",
+      "status": "reusable-helper-tested",
+      "bytes": 1075,
+      "sha256": "31b460bec369b8a3dedd837ade0d87e78be9355707f4fea81127bd72c287d6c3"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "reference_canvas": [
+    1920,
+    1080
+  ],
+  "colors": {
+    "background": "#080B17",
+    "violet": "#8655E8",
+    "blue": "#4D50F3",
+    "cyan_edge": "#8DEDF2",
+    "text": "#F4F1FF"
+  },
+  "font": {
+    "family": "PingFang SC",
+    "roles": [
+      "Medium",
+      "Semibold"
+    ],
+    "bundle_included": false
+  },
+  "status": "starting-values-not-fixed-layout",
+  "icon_style": "white-filled-geometric-with-consistent-negative-space",
+  "layout_policy": "imagegen-led; follow approved keyframe; no preset positions, sizes, ratios or equal thirds",
+  "typography_scale_policy": "measure approved imagegen design after approval, then faithfully implement",
+  "current_reference": "references/images/approved-imagegen-layout.png",
+  "icon_complexity_policy": "single primary silhouette; essential negative space only; no nested panels or repeated miniature scenes",
+  "visual_explanation_policy": "concepts and processes require meaningful visual explanation, not keyword-only lists",
+  "current_feedback_date": "2026-11-07"
+}
