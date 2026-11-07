@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>第一节 · 深紫白图标动画</title><style>html,body{margin:0;background:#020218;overflow:hidden}canvas{display:block}</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas><script src="scenes.js"></script><script>
+const canvas=document.getElementById('c'),ctx=canvas.getContext('2d');
+const WHITE='#f8f8fb',FONT='PingFang SC, Hiragino Sans GB, sans-serif';
+const clamp=v=>Math.max(0,Math.min(1,v));
+const ease=v=>{v=clamp(v);return 1-(1-v)**4};
+const selected=new URLSearchParams(location.search).get('id')||'1-1';
+const scene=COMPOSITIONS.find(s=>s.id===selected);if(!scene)throw Error('Unknown composition');
+const images={};
+for(const name of new Set(SCENES.flatMap(s=>s.items.map(i=>i.icon)))){const im=new Image();im.src='assets/icons/'+name+'-fill.svg';images[name]=im;}
+for(const src of new Set(SCENES.flatMap(s=>(s.media||[]).map(m=>m.src)))){const im=new Image();im.src=src;images[src]=im;}
+const bg=new Image();bg.src='background.png';images.background=bg;
+function background(){ctx.drawImage(bg,0,0,1920,1080)}
+function text(value,x,y,size){ctx.fillStyle=WHITE;ctx.font=`700 ${size}px ${FONT}`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(value,x,y)}
+function drawItem(item,t){const p=ease((t-item.at)/.5);if(p<=0)return;const dy=22*(1-p),scale=.94+.06*p,size=(item.size||156)*scale;
+ ctx.save();ctx.globalAlpha*=p;const alpha=ctx.globalAlpha;ctx.filter='invert(1)';ctx.drawImage(images[item.icon],item.x-size/2,item.y+dy-size/2,size,size);ctx.filter='none';text(item.label,item.x,item.y+dy+(item.gap||115),item.font||44);ctx.restore();
+ window.visible.push({label:item.label,alpha,x:item.x,y:item.y+dy,size,bottom:item.y+dy+(item.gap||115)+(item.font||44)/2});}
+function symbol(item,t){const p=ease((t-item.at)/.4);if(p<=0)return;ctx.save();ctx.globalAlpha*=p;ctx.strokeStyle=WHITE;ctx.lineWidth=9;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();if(item.kind==='plus'){ctx.moveTo(item.x-21,item.y);ctx.lineTo(item.x+21,item.y);ctx.moveTo(item.x,item.y-21);ctx.lineTo(item.x,item.y+21)}else{ctx.moveTo(item.x-33,item.y);ctx.lineTo(item.x+33,item.y);ctx.moveTo(item.x+11,item.y-21);ctx.lineTo(item.x+33,item.y);ctx.lineTo(item.x+11,item.y+21)}ctx.stroke();ctx.restore()}
+function media(m,t){const p=ease((t-m.at)/.45);if(p<=0)return;const im=images[m.src],scale=Math.min(m.w/im.width,m.h/im.height),w=im.width*scale,h=im.height*scale,dy=16*(1-p);ctx.save();ctx.globalAlpha*=p;ctx.beginPath();ctx.roundRect(m.x-w/2,m.y-h/2+dy,w,h,20);ctx.clip();ctx.drawImage(im,m.x-w/2,m.y-h/2+dy,w,h);ctx.restore();ctx.save();ctx.globalAlpha*=p;text(m.label,m.x,m.y+m.h/2+48,42);ctx.restore();window.visible.push({label:m.label,alpha:ctx.globalAlpha*p,bottom:m.y+m.h/2+70})}
+function draw(t){background();window.visible=[];for(const track of scene.tracks){if(t<track.start||t>=track.end)continue;const part=SCENES.find(s=>s.id===track.part);const alpha=track.fadeAt===undefined?1:1-ease((t-track.fadeAt)/(track.end-track.fadeAt));if(alpha<=0)continue;ctx.save();ctx.globalAlpha=alpha;const local=(t-track.start)*track.rate;for(const m of part.media||[])media(m,local);for(const item of part.items)drawItem(item,local);for(const item of part.symbols||[])symbol(item,local);ctx.restore()}}
+window.seek=draw;window.scene=scene;
+window.ready=Promise.all(Object.values(images).map(im=>im.decode())).then(()=>document.fonts.ready).then(()=>draw(0));
+</script></body></html>

@@ -1,0 +1,10 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {spawnSync} from 'node:child_process';
+const root=import.meta.dirname,dir=root+'/checks/8-7_剪辑时间线';
+const timing=JSON.parse(fs.readFileSync(dir+'/timing.json'));
+assert.deepEqual(timing.order.map(x=>x.label).filter(x=>x!=='时间线'),['定位台词','切开片段','移除问题段','单独生成','原位替换']);assert.equal(timing.bad.length,0);
+assert(fs.readFileSync(root+'/background.png').equals(fs.readFileSync(new URL('../../skills/dark-icon-course-motion/assets/background.png',import.meta.url))));
+const m=JSON.parse(fs.readFileSync(dir+'/manifest.json')),ff=(process.env.FFMPEG_PATH || 'ffmpeg');
+const f=[5,6,13,22,38,39,45,50,59,60,90,96,102,122,123,130,139,194,195,208,223,254,298,299];
+const p=spawnSync(ff,['-v','error','-i',m.output,'-vf','select='+f.map(n=>`eq(n\\,${n})`).join('+')+',scale=384:216,tile=4x6','-frames:v','1','-y',dir+'/transitions.png'],{encoding:'utf8'});assert.equal(p.status,0,p.stderr);
+const log=fs.readFileSync(dir+'/decode.log','utf8');assert(log.includes('1920x1080'));assert(log.includes('30 fps'));assert(log.includes('Duration: 00:00:10.00'));assert(!log.includes('Audio:'));
+console.log('顺序、字幕区、背景一致性、实际1080P/30fps/10秒/无音轨通过。');

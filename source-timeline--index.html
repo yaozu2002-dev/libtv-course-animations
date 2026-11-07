@@ -1,0 +1,33 @@
+<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#020218}canvas{display:block}</style><canvas width="1920" height="1080"></canvas><script>
+const c=document.querySelector('canvas'),ctx=c.getContext('2d'),white='#f8f8fb',scene={title:'切开_重新生成_原位替换_V2'};
+const imgs={};for(const [key,src]of Object.entries({bg:'background.png',film:'assets/icons/film-slate-fill.svg'})){imgs[key]=new Image();imgs[key].src=src;}
+const clamp=x=>Math.max(0,Math.min(1,x)),ease=x=>{x=clamp(x);return x*x*x*(x*(x*6-15)+10)},mix=(a,b,p)=>a+(b-a)*p;
+function rect(x,y,w,h,fill,r=12,stroke){ctx.beginPath();ctx.roundRect(x,y,w,h,r);if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke()}}
+function text(s,x,y,size=30,color=white,align='left'){ctx.fillStyle=color;ctx.font=`600 ${size}px "PingFang SC",sans-serif`;ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillText(s,x,y);}
+function wave(x,y,w,h,seed){ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();ctx.strokeStyle='rgba(248,248,251,.82)';ctx.lineWidth=3;ctx.lineCap='round';for(let i=5;i<w;i+=7){const z=(i+x-360)/7;const a=5+(Math.sin(z*.74+seed)**2*.52+Math.sin(z*.23+seed)**2*.48)*(h/2-10);ctx.beginPath();ctx.moveTo(x+i,y+h/2-a);ctx.lineTo(x+i,y+h/2+a);ctx.stroke()}ctx.restore()}
+function clip(x,y,w,label,newClip=false){rect(x,y,w,120,newClip?'#504d7a':'#282641',10,'rgba(248,248,251,.45)');text(label,x+15,y+23,27);ctx.save();ctx.beginPath();ctx.rect(x+3,y+43,w-6,73);ctx.clip();for(let p=x+8;p<x+w-12;p+=86){rect(p,y+44,78,65,newClip?'#6a668e':'#3d3b57',6);ctx.filter='invert(1)';ctx.globalAlpha*=.8;ctx.drawImage(imgs.film,p+21,y+55,36,36);ctx.globalAlpha/=.8;ctx.filter='none'}ctx.restore()}
+function audio(x,y,w,newClip=false){rect(x,y,w,70,newClip?'#444568':'#24263f',9,'rgba(248,248,251,.3)');wave(x+5,y+6,w-10,58,newClip?1.5:0)}
+function cursor(x,y,a=1){ctx.save();ctx.globalAlpha*=a;ctx.fillStyle=white;ctx.strokeStyle='#15142a';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+5,y+33);ctx.lineTo(x+13,y+24);ctx.lineTo(x+23,y+41);ctx.lineTo(x+31,y+36);ctx.lineTo(x+21,y+20);ctx.lineTo(x+34,y+18);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore()}
+function draw(t){ctx.globalAlpha=1;ctx.drawImage(imgs.bg,0,0,1920,1080);window.visible=[];let a=ease((t-.2)/.5);ctx.save();ctx.globalAlpha=a;
+// One uninterrupted editing workspace: ruler, linked video and audio tracks.
+rect(220,345,1450,350,'rgba(14,15,35,.88)',22,'rgba(248,248,251,.13)');
+rect(340,411,1270,132,'rgba(248,248,251,.035)',5);rect(340,554,1270,80,'rgba(248,248,251,.035)',5);
+text('V1',272,477,29);text('A1',272,594,29);
+for(let s=0;s<=15;s++){let x=360+s*80;ctx.strokeStyle='rgba(248,248,251,.4)';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,390);ctx.lineTo(x,s%3===0?373:382);ctx.stroke();if(s%3===0)text(`00:${String(s).padStart(2,'0')}`,x,360,22,'rgba(248,248,251,.7)','center');}
+const split=t>=2,removed=t>=3.4,filled=t>=7.4;
+if(!split){clip(360,420,1200,'原片');audio(360,560,1200)}else{clip(360,420,478,'原片');audio(360,560,478);clip(1082,420,478,'原片');audio(1082,560,478);if(!removed){const fade=1-ease((t-3)/.4);ctx.save();ctx.globalAlpha*=fade;clip(842,420,236,'问题台词');audio(842,560,236);ctx.restore()}}
+// Linked selection spans both tracks, then leaves a gap of unchanged length.
+if(t>=1.3&&t<3.4){ctx.save();ctx.globalAlpha*=ease((t-1.3)/.3)*(1-ease((t-3)/.4));ctx.strokeStyle=white;ctx.lineWidth=3;ctx.strokeRect(840,415,240,220);ctx.restore();}
+let stage=t<1.3?'定位台词':t<3?'切开片段':t<4.1?'移除问题段':t<6.5?'单独生成':'原位替换';
+// Regenerated linked media appears above, then snaps into exactly the same range.
+if(t>=4.1){const p=ease((t-6.5)/.9),alpha=ease((t-4.1)/.5);ctx.save();ctx.globalAlpha*=alpha;clip(842,mix(120,420,p),236,'新片段',true);audio(842,mix(248,560,p),236,true);ctx.restore();}
+const px=t<1.3?mix(400,958,ease((t-.5)/.8)):t<7.4?958:mix(958,1220,ease((t-7.4)/1));
+// Hide playhead while replacing, so it cannot cross the moving clip.
+if(t<3||t>=7.4){ctx.strokeStyle=white;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(px,398);ctx.lineTo(px,641);ctx.stroke();ctx.fillStyle=white;ctx.beginPath();ctx.moveTo(px-9,393);ctx.lineTo(px+9,393);ctx.lineTo(px,405);ctx.fill();}
+if(t>=1.4&&t<3)cursor(1077,434,ease((t-1.4)/.3));
+if(t>=6.5&&t<7.55){const p=ease((t-6.5)/.9);cursor(1060,mix(199,499,p),1-ease((t-7.4)/.15));}
+// Only one short operation label, above the workspace (never in subtitle area).
+text(stage,360,280,40);window.visible.push({label:stage,alpha:a,bottom:302},{label:'时间线',alpha:a,bottom:697});
+window.state={split,removed,filled,newStart:6,newEnd:9,beforeEnd:6,afterStart:9};ctx.restore();}
+window.seek=draw;window.scene=scene;window.ready=Promise.all(Object.values(imgs).map(x=>x.decode())).then(()=>document.fonts.ready).then(()=>draw(0));
+</script>

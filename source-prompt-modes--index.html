@@ -1,0 +1,42 @@
+<!doctype html><meta charset="utf-8"><style>html,body{margin:0;overflow:hidden;background:#03021c}canvas{display:block}</style><canvas width="1920" height="1080"></canvas><script>
+const c=document.querySelector('canvas'),g=c.getContext('2d');
+const E=x=>{x=Math.max(0,Math.min(1,x));return 1-Math.pow(1-x,3)},smooth=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)};
+const img=src=>new Promise((ok,no)=>{let i=new Image;i.onload=()=>ok(i);i.onerror=no;i.src=src});
+const white='#F8F8FB';let bg,shot,icons={};
+function text(s,x,y,size=36,align='left',weight=500){g.fillStyle=white;g.font=`${weight} ${size}px "PingFang SC",sans-serif`;g.textAlign=align;g.textBaseline='middle';g.fillText(s,x,y)}
+function icon(name,x,y,size){g.drawImage(icons[name],x-size/2,y-size/2,size,size)}
+function panel(x,y,w,h,alpha){g.fillStyle=`rgba(255,255,255,${alpha})`;g.beginPath();g.roundRect(x,y,w,h,22);g.fill()}
+function lines(s,width,size){g.font=`500 ${size}px "PingFang SC",sans-serif`;const count=Math.ceil(g.measureText(s).width/width);if(count===1)return [s];const target=g.measureText(s).width/count;let out=[],line='';for(let k=0;k<s.length;k++){line+=s[k];if(out.length<count-1&&g.measureText(line).width>target*.73&&/[，。、；]/.test(s[k])){out.push(line);line=''}else if(g.measureText(line+(s[k+1]??'')).width>width){out.push(line);line=''}}if(line)out.push(line);return out}
+window.ready=(async()=>{window.scene=(await(await fetch('./mapping.json')).json()).find(s=>s.id===new URLSearchParams(location.search).get('id'));bg=await img('assets/background.png');shot=await img('assets/node-page.png');for(const n of ['flag','image-square','stack-simple','sliders-horizontal','user','palette','person-simple-run','speaker-high','file-text','film-slate','puzzle-piece']){let svg=await(await fetch('assets/icons/'+n+'-fill.svg')).text();svg=svg.replaceAll('currentColor','#F8F8FB');icons[n]=await img('data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg))}await document.fonts.ready;window.seek(0)})();
+window.seek=t=>{g.globalAlpha=1;g.drawImage(bg,0,0,1920,1080);window.visible=[];const s=window.scene;if(!s)return;
+if(s.type==='prompt'){
+ const n=s.labels.length,top=n===4?178:144,gap=n===4?151:128,fs=n===4?36:32;
+ let active=0;for(let i=0;i<n;i++)if(t>=s.times[i])active=i;
+ const end=smooth((t-(s.duration-3))/.65);
+ for(let i=0;i<n;i++){
+  let p=E((t-s.times[i])/.55);if(p===0)continue;
+  const dim=i<active?smooth((t-s.times[i+1])/.55):0;
+  let strength=1-.38*dim*(1-end),y=top+i*gap+18*(1-p);
+  g.save();g.globalAlpha=p*strength;
+  const mid=y+(gap-18)/2-15;icon(s.icons[i],300,mid,72);text(s.labels[i],365,mid,38,'left',600);
+  panel(640,y-15,1080,gap-18,.055+.025*(1-dim));
+  const wrapped=lines(s.texts[i],1000,fs);const lh=fs+13,first=y+(gap-18)/2-15-(wrapped.length-1)*lh/2;
+  wrapped.forEach((l,j)=>text(l,676,first+j*lh,fs));
+  window.visible.push({label:s.labels[i],alpha:p,bottom:Math.max(y+71,first+(wrapped.length-1)*lh+fs/2),lines:wrapped.length});g.restore();
+ }
+}else if(s.type==='modes'){
+ let target=s.focus??Math.min(2,Math.max(0,Math.floor((t-.9)/2.8)));
+ for(let i=0;i<3;i++){
+  const p=E((t-.25-i*.12)/.6);if(!p)continue;
+  const latest=s.focus===undefined?.9+target*2.8:.4;
+  const q=smooth((t-latest)/.55),prev=s.focus===undefined?Math.max(0,target-1):target;
+  const strength=(i===prev?1:.32)*(1-q)+(i===target?1:.32)*q;
+  const x=470+i*490,y=450+20*(1-p),k=.97+.03*p;
+  g.save();g.globalAlpha=p*strength;g.translate(x,y);g.scale(k,k);panel(-208,-164,416,328,.055);icon(['file-text','stack-simple','puzzle-piece'][i],0,-35,142);text(['文生视频','首尾帧生视频','全能参考'][i],0,91,40,'center',600);g.restore();window.visible.push({label:['文生视频','首尾帧生视频','全能参考'][i],alpha:p,bottom:y+164});
+ }
+}else{
+ let p=E((t-.3)/.65);g.save();g.globalAlpha=p;icon('film-slate',290,380+18*(1-p),150);text('视频节点',290,510+18*(1-p),44,'center',600);g.restore();
+ let q=E((t-1)/.85);if(q){g.save();g.globalAlpha=q;let x=570,y=105+18*(1-q),w=1220,h=w*9/16;g.beginPath();g.roundRect(x,y,w,h,20);g.clip();g.drawImage(shot,x,y,w,h);g.restore();window.visible.push({label:'真实节点截图',alpha:q,bottom:y+h})}
+}
+};
+</script>
