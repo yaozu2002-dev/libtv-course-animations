@@ -1,0 +1,101 @@
+{
+  "title": "三种创作媒介·认可稿还原示例",
+  "width": 1920,
+  "height": 1080,
+  "referenceWidth": 1672,
+  "referenceHeight": 941,
+  "fps": 30,
+  "duration": 13,
+  "background": "assets/background.png",
+  "font": {
+    "family": "PingFang SC",
+    "file": null,
+    "localName": "PingFangSC-Medium"
+  },
+  "audio": {
+    "mode": "silent-demo",
+    "note": "此起步示例无口播音轨；不能用它静默替代有声课程。"
+  },
+  "status": "approved-layout-reproduction-example-not-universal-layout",
+  "layers": [
+    {
+      "id": "text-icon",
+      "kind": "image",
+      "src": "assets/text.png",
+      "x": 428,
+      "y": 356,
+      "width": 141,
+      "height": 153,
+      "start": 0.3,
+      "entrance": 0.85,
+      "dy": 12
+    },
+    {
+      "id": "text-label",
+      "kind": "text",
+      "text": "文字",
+      "x": 450,
+      "y": 525,
+      "width": 105,
+      "height": 70,
+      "fontSize": 50,
+      "weight": 500,
+      "start": 0.3,
+      "entrance": 0.85,
+      "dy": 12
+    },
+    {
+      "id": "image-icon",
+      "kind": "image",
+      "src": "assets/image.png",
+      "x": 750,
+      "y": 364,
+      "width": 172,
+      "height": 141,
+      "start": 3.8,
+      "entrance": 0.85,
+      "dy": 12
+    },
+    {
+      "id": "image-label",
+      "kind": "text",
+      "text": "图片",
+      "x": 784,
+      "y": 525,
+      "width": 108,
+      "height": 70,
+      "fontSize": 50,
+      "weight": 500,
+      "start": 3.8,
+      "entrance": 0.85,
+      "dy": 12
+    },
+    {
+      "id": "video-icon",
+      "kind": "image",
+      "src": "assets/video.png",
+      "x": 1083,
+      "y": 368,
+      "width": 194,
+      "height": 134,
+      "start": 7.4,
+      "entrance": 0.85,
+      "dy": 12
+    },
+    {
+      "id": "video-label",
+      "kind": "text",
+      "text": "视频",
+      "x": 1122,
+      "y": 525,
+      "width": 114,
+      "height": 70,
+      "fontSize": 50,
+      "weight": 500,
+      "start": 7.4,
+      "entrance": 0.85,
+      "dy": 12
+    }
+  ],
+  "skillReference": "references/images/approved-imagegen-layout.png"
+}

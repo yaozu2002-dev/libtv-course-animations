@@ -1,0 +1,4 @@
+interface:
+  display_name: "黄白课程包装动效"
+  short_description: "由imagegen设计深蓝紫课程包装，使用简洁白色面型、有用画面与充分留白，再按稿制作动效"
+  default_prompt: "使用 $huangbai-course-motion 制作课程包装：先让imagegen自主设计，以同系列简洁白色面型和有意义的图形讲解内容，保留充分留白，避免嵌套图标及满屏关键词，再按稿还原动效。"

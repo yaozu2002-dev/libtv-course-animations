@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>认可稿还原示例</title>
+<style>*{box-sizing:border-box}html,body{margin:0;background:#030416;overflow:hidden}#canvas{position:relative;overflow:hidden;transform-origin:top left}#background{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.layer{position:absolute;opacity:0;white-space:nowrap;margin:0;display:block;color:#f8f7ff}.image{object-fit:contain}#error{font:20px sans-serif;color:white;white-space:pre-wrap}</style></head><body><div id="canvas"><img id="background" alt=""></div><pre id="error"></pre><script type="module">
+const config=await (await fetch('composition.json')).json();window.courseConfig=config;
+const canvas=document.querySelector('#canvas');canvas.style.width=config.width+'px';canvas.style.height=config.height+'px';
+const sx=config.width/config.referenceWidth,sy=config.height/config.referenceHeight;
+const font=new FontFace('CourseFont',config.font.file?`url("${config.font.file}")`:`local("${config.font.localName||config.font.family}")`);
+try{await font.load();document.fonts.add(font)}catch{throw new Error('所需中文字体不可用：'+config.font.family+'。请在composition.json中填写已获授权的本地字体或工程内字体文件；不要静默换字。')}
+const bg=document.querySelector('#background');bg.src=config.background;await bg.decode();
+const layers=[];
+for(const l of config.layers){const el=document.createElement(l.kind==='image'?'img':'p');el.className='layer '+l.kind;el.dataset.layerId=l.id;Object.assign(el.style,{left:l.x*sx+'px',top:l.y*sy+'px',width:l.width*sx+'px',height:l.height*sy+'px'});if(l.kind==='image'){el.src=l.src;await el.decode()}else{el.textContent=l.text;Object.assign(el.style,{fontFamily:'CourseFont',fontSize:l.fontSize*sy+'px',fontWeight:String(l.weight||500),lineHeight:'1.4',color:l.color||'#f8f7ff'})}canvas.append(el);layers.push({el,l})}
+window.setFrame=seconds=>{for(const {el,l} of layers){const p=Math.max(0,Math.min(1,(seconds-l.start)/(l.entrance||.001)));const e=1-Math.pow(1-p,3);el.style.opacity=String(e);el.style.transform=`translateY(${(1-e)*(l.dy||0)*sy}px)`}window.courseTime=seconds};
+window.setFrame(0);window.courseReady=true;
+function fit(){canvas.style.transform=`scale(${Math.min(innerWidth/config.width,innerHeight/config.height)})`};fit();addEventListener('resize',fit);
+let playing=false,start=0,from=0;function tick(now){if(!playing)return;const t=Math.min(config.duration,from+(now-start)/1000);setFrame(t);if(t<config.duration)requestAnimationFrame(tick);else playing=false}addEventListener('keydown',e=>{if(e.code!=='Space')return;e.preventDefault();playing=!playing;if(playing){from=window.courseTime>=config.duration?0:window.courseTime;start=performance.now();requestAnimationFrame(tick)}});
+</script><script>window.addEventListener('unhandledrejection',e=>{window.courseError=String(e.reason);document.querySelector('#error').textContent=window.courseError});window.addEventListener('error',e=>{window.courseError=e.message;document.querySelector('#error').textContent=e.message})</script></body></html>

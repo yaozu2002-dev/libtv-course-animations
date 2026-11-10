@@ -1,0 +1,36 @@
+{
+  "source_size": [
+    1672,
+    941
+  ],
+  "status": "measured-from-approved-reference-only",
+  "icons": [
+    {
+      "name": "text",
+      "box": [
+        428,
+        356,
+        569,
+        509
+      ]
+    },
+    {
+      "name": "image",
+      "box": [
+        750,
+        364,
+        922,
+        505
+      ]
+    },
+    {
+      "name": "video",
+      "box": [
+        1083,
+        368,
+        1277,
+        502
+      ]
+    }
+  ]
+}

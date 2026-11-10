@@ -1,0 +1,68 @@
+{
+  "source_image": "approved-imagegen-layout.png",
+  "source_sha256": "012e2e71feae0ceaf11140b8cfc75c41f180f87f30c61dd906b539fd4a4baedb",
+  "source_size": [
+    1672,
+    941
+  ],
+  "method": "white-on-dark-only",
+  "dark_floor": 60,
+  "white_level": 250,
+  "status": "extracted-needs-visual-review",
+  "icons": [
+    {
+      "name": "text",
+      "file": "text.png",
+      "box": [
+        428,
+        356,
+        569,
+        509
+      ],
+      "size": [
+        141,
+        153
+      ],
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "image",
+      "file": "image.png",
+      "box": [
+        750,
+        364,
+        922,
+        505
+      ],
+      "size": [
+        172,
+        141
+      ],
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    {
+      "name": "video",
+      "file": "video.png",
+      "box": [
+        1083,
+        368,
+        1277,
+        502
+      ],
+      "size": [
+        194,
+        134
+      ],
+      "alpha_range": [
+        0,
+        255
+      ]
+    }
+  ]
+}
